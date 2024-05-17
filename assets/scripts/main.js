@@ -70,7 +70,21 @@ function initFormHandler() {
 	form_element.addEventListener('submit',(event) => {
 		let form_data = new FormData(form_element);
 		let recipeObject  = {}
-	})
+		form_data.forEach((val, val_kes) => {
+			recipeObject[val_kes] = val;
+		})
+		let card_ele = document.createElement('recipe-card');
+		card_ele.data = recipeObject;
+		document.querySelector('main').appendChild(card_ele);
+		let local_array = getRecipesFromStorage()
+		local_array.push(recipeObject);
+		saveRecipesToStorage(local_array);
+	});
+	const clear_button = document.querySelector('.danger');
+	clear_button.addEventListener('click',(event)=>{
+		localStorage.removeItem('recipes');
+		document.querySelector('main').innerHTML = '';
+	});
 	// B2. TODO - Get a reference to the <form> element
 	// B3. TODO - Add an event listener for the 'submit' event, which fires when the
 	//            submit button is clicked
