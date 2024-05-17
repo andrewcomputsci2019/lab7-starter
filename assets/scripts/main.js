@@ -24,6 +24,7 @@ function getRecipesFromStorage() {
 	// A9. TODO - Complete the functionality as described in this function
 	//           header. It is possible in only a single line, but should
 	//           be no more than a few lines.
+	return JSON.parse(localStorage.getItem('recipes'))
 }
 
 /**
@@ -39,6 +40,12 @@ function addRecipesToDocument(recipes) {
 	//            create a <recipe-card> element for each one, and populate
 	//            each <recipe-card> with that recipe data using element.data = ...
 	//            Append each element to <main>
+	const main_element = document.querySelector('main');
+	recipes.forEach((obj) => {
+		let ele = document.createElement('recipe-card');
+		ele.data = obj;
+		main_element.appendChild(ele);
+	})
 }
 
 /**
@@ -51,6 +58,7 @@ function saveRecipesToStorage(recipes) {
 	// B1. TODO - Complete the functionality as described in this function
 	//            header. It is possible in only a single line, but should
 	//            be no more than a few lines.
+	localStorage.setItem('recipes',JSON.stringify(recipes));
 }
 
 /**
@@ -58,6 +66,11 @@ function saveRecipesToStorage(recipes) {
  * <button>.
  */
 function initFormHandler() {
+	const form_element = document.querySelector('form')
+	form_element.addEventListener('submit',(event) => {
+		let form_data = new FormData(form_element);
+		let recipeObject  = {}
+	})
 	// B2. TODO - Get a reference to the <form> element
 	// B3. TODO - Add an event listener for the 'submit' event, which fires when the
 	//            submit button is clicked
